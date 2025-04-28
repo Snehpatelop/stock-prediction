@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Price Predictor</h1>
+        
+        {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="stock_ticker">Stock Ticker Symbol:</label>
+                <input type="text" id="stock_ticker" name="stock_ticker" required placeholder="e.g., AAPL, MSFT, GOOGL">
+                <small>Enter the stock ticker symbol (e.g., AAPL for Apple)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="start_date">Start Date for Training:</label>
+                <input type="date" id="start_date" name="start_date" value="{{ default_start }}" required>
+                <small>Select the start date for historical data (recommend: at least 1 year ago)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" value="{{ max_date }}" max="{{ max_date }}" required>
+                <small>Select the end date for the prediction</small>
+            </div>
+            
+            <button type="submit" class="btn">Predict Next Day's Price</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Price Prediction Results</h1>
+        
+        <div class="result-card">
+            <h2>{{ stock_ticker }} Prediction</h2>
+            
+            <div class="prediction-highlight">
+                <div class="prediction-box">
+                    <span class="label">Predicted Next Day Price:</span>
+                    <span class="value">${{ predicted_price }}</span>
+                </div>
+                
+                <div class="prediction-box">
+                    <span class="label">Last Known Price:</span>
+                    <span class="value">${{ actual_price }}</span>
+                </div>
+            </div>
+            
+            <div class="metrics">
+                <h3>Model Performance Metrics</h3>
+                <div class="metric-grid">
+                    <div class="metric">
+                        <span class="metric-name">RMSE:</span>
+                        <span class="metric-value">{{ rmse }}</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-name">R² Score:</span>
+                        <span class="metric-value">{{ r2 }}</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-name">MAE:</span>
+                        <span class="metric-value">{{ mae }}</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-name">MAPE:</span>
+                        <span class="metric-value">{{ mape }}%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3>Price Prediction Visualization</h3>
+                <img src="{{ url_for('static', filename=plot_filename) }}" alt="Price Prediction Chart" class="img-fluid mb-4">
+
+            </div>
+            
+            <div class="disclaimer">
+                <p><strong>Disclaimer:</strong> This prediction is based on historical data and should not be used as financial advice. Always consult with a financial advisor before making investment decisions.</p>
+            </div>
+            
+            <a href="/" class="btn">Predict Another Stock</a>
+        </div>
+    </div>
+</body>
+</html>
